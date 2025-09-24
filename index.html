@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>JS Calculator</title>
 <link rel="stylesheet" href="style.css" />
-<link rel="manifest" href="manifest.webmanifest">
+<link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#ffffff">
 </head>
 <body>
@@ -41,9 +41,26 @@
 <button id="clear" class="span2">C</button>
 <button id="equals" class="span2">=</button>
 </div>
+
+
+<div class="actions" style="margin-top: .75rem; display:flex; gap:.5rem; align-items:center; flex-wrap:wrap;">
+<button id="install" hidden>Install app</button>
+<button id="copy">Copy</button>
+<button id="share" hidden>Share</button>
+<button id="locate">Where am I?</button>
+<span id="status" aria-live="polite"></span>
+</div>
 </main>
 
 
 <script src="app.js"></script>
+<script>
+// Register the service worker (scope = current folder, good for GitHub Pages repo path)
+if ('serviceWorker' in navigator) {
+window.addEventListener('load', () => {
+navigator.serviceWorker.register('./sw.js').catch(console.error);
+});
+}
+</script>
 </body>
 </html>

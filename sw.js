@@ -1,5 +1,5 @@
 // sw.js
-const CACHE_NAME = 'js-calc-v2';
+const CACHE_NAME = 'js-calc-v1';
 const ASSETS = [
 './',
 './index.html',

@@ -59,3 +59,66 @@ if ('+-*/'.includes(last)) display.value = v.slice(0, -1) + e.key; else display.
 if (e.key === 'Enter' || e.key === '=') equals.click();
 if (e.key.toLowerCase() === 'c') clear.click();
 });
+
+const installBtn = document.getElementById('install');
+const copyBtn = document.getElementById('copy');
+const shareBtn = document.getElementById('share');
+const locateBtn = document.getElementById('locate');
+const statusEl = document.getElementById('status');
+
+
+// Haptics on button press
+function buzz() { if (navigator.vibrate) navigator.vibrate(10); }
+for (const el of document.querySelectorAll('button[data-key], button[data-op], #equals, #clear')) {
+el.addEventListener('click', buzz);
+}
+
+
+// Clipboard copy
+copyBtn.addEventListener('click', async () => {
+try {
+await navigator.clipboard.writeText(display.value || '0');
+statusEl.textContent = 'Copied!';
+} catch {
+statusEl.textContent = 'Clipboard unavailable.';
+}
+});
+
+
+// Web Share (if supported)
+if (navigator.share) {
+shareBtn.hidden = false;
+shareBtn.addEventListener('click', async () => {
+try {
+await navigator.share({ title: 'Calculator', text: `Result: ${display.value || '0'}`, url: location.href });
+statusEl.textContent = 'Shared.';
+} catch { statusEl.textContent = 'Share canceled.'; }
+});
+}
+
+
+// Geolocation
+locateBtn.addEventListener('click', () => {
+if (!('geolocation' in navigator)) { statusEl.textContent = 'No geolocation.'; return; }
+navigator.geolocation.getCurrentPosition(
+({ coords }) => statusEl.textContent = `${coords.latitude.toFixed(4)}, ${coords.longitude.toFixed(4)}`,
+(err) => statusEl.textContent = err.message
+);
+});
+
+
+// Install prompt
+let deferredPrompt;
+window.addEventListener('beforeinstallprompt', (e) => {
+e.preventDefault();
+deferredPrompt = e;
+installBtn.hidden = false;
+});
+installBtn.addEventListener('click', async () => {
+installBtn.hidden = true;
+if (!deferredPrompt) return;
+deferredPrompt.prompt();
+const { outcome } = await deferredPrompt.userChoice;
+statusEl.textContent = outcome === 'accepted' ? 'Installed!' : 'Install dismissed.';
+deferredPrompt = null;
+});

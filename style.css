@@ -1,0 +1,8 @@
+:root { font-family: system-ui, Arial, sans-serif; }
+body { display: grid; place-items: center; min-height: 100vh; margin: 0; background: #f7f7f7; }
+.calc { width: min(380px, 94vw); background: #fff; padding: 1rem; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,.08); }
+.display { width: 100%; font-size: 1.6rem; padding: .6rem .8rem; border: 1px solid #ddd; border-radius: 10px; margin: .5rem 0 1rem; }
+.grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: .6rem; }
+button { padding: .9rem .6rem; border-radius: 12px; border: 1px solid #ddd; background: #fafafa; cursor: pointer; font-size: 1.1rem; }
+button:active { transform: translateY(1px); }
+.span2 { grid-column: span 2; }

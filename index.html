@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>JS Calculator</title>
+<link rel="stylesheet" href="style.css" />
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#ffffff">
+</head>
+<body>
+<main class="calc">
+<h1>🧮 Calculator</h1>
+<input id="display" class="display" type="text" inputmode="decimal" placeholder="0" aria-label="display" />
+
+
+<div class="grid">
+<button data-key="7">7</button>
+<button data-key="8">8</button>
+<button data-key="9">9</button>
+<button data-op="/">÷</button>
+
+
+<button data-key="4">4</button>
+<button data-key="5">5</button>
+<button data-key="6">6</button>
+<button data-op="*">×</button>
+
+
+<button data-key="1">1</button>
+<button data-key="2">2</button>
+<button data-key="3">3</button>
+<button data-op="-">−</button>
+
+
+<button data-key="0" class="span2">0</button>
+<button data-key=".">.</button>
+<button data-op="+">+</button>
+
+
+<button id="clear" class="span2">C</button>
+<button id="equals" class="span2">=</button>
+</div>
+</main>
+
+
+<script src="app.js"></script>
+</body>
+</html>
